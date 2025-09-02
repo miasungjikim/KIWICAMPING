@@ -1,2 +1,4 @@
 # KIWICAMPING
 CS104_UX_PRINCIPLES_PROJECT
+
+- done: connect json file
