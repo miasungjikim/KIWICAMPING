@@ -2,14 +2,58 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, user-scalable=no"
+    />
     <title>KIWI CAMPING</title>
     <link rel="stylesheet" href="./css/reset.css" />
     <link rel="stylesheet" href="./css/common.css" />
     <link rel="stylesheet" href="./css/main.css" />
+
+    <script src="./js/main.js" defer></script>
   </head>
 
   <body>
+    <!-- NAV -->
+    <nav id="navi" class="navi">
+      <a href="#" onclick="closeMenu(event)"
+        ><img src="./image/icon/close.svg" alt="close"
+      /></a>
+      <h3>FILTERS</h3>
+      <h4>Region</h4>
+      <form action="#">
+        <select name="All Region" id="regions" class="regions">
+          <option value="All Region">All Region</option>
+          <option value="Northland">Northland</option>
+          <option value="Southland">Southland</option>
+          <option value="West Coast">West Coast</option>
+          <option value="Auckland">Auckland</option>
+          <option value="Canterbury">Canterbury</option>
+          <option value="Nelson/Tasman">Nelson/Tasman</option>
+          <option value="Fiordland">Fiordland</option>
+          <option value="Marlborough">Marlborough</option>
+          <option value="Coromandel">Coromandel</option>
+        </select>
+      </form>
+      <h4>Suitability</h4>
+      <form action="#" class="suitability">
+        <p>
+          <label for="suit1">Dog-Friendly</label>
+          <input type="checkbox" id="suit1" name="suit1" value="" />
+        </p>
+        <p>
+          <label for="suit2">Bookable</label>
+          <input type="checkbox" id="suit2" name="suit2" value="" />
+        </p>
+        <p>
+          <label for="suit3">Free Site</label>
+          <input type="checkbox" id="suit3" name="suit3" value="" />
+        </p>
+      </form>
+      <button>SEARCH</button>
+    </nav>
+
     <!-- Header -->
     <header>
       <h1 class="logo"><img src="./image/logo.png" alt="logo" /></h1>
@@ -20,10 +64,10 @@
             name="search"
             placeholder="Where do you want to go?"
           />
-          <a href="#" class="filter">
-            <img src="./image/icon/filter.svg" alt="filter" />
-          </a>
         </form>
+        <a class="filter" onclick="toggleMenu()">
+          <img src="./image/icon/filter.svg" alt="filter" />
+        </a>
       </div>
     </header>
 

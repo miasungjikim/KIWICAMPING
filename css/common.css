@@ -5,16 +5,56 @@
 */
 
 
-h1,h2,h3,h4{
+h1,h2,h3{
     font-size: 18px;
     font-family: "Raleway", Noto Sans, sans-serif;
     color:#212121;
     font-weight: bold;
 }
 
-p,a{
+p,a,label,h4{
     font-size:14px;
     color:#212121;
     font-family: "Noto Sans", sans-serif;
 }
 
+
+        /* Footer */
+        footer {
+            width: 100%;
+            background-color: #FBFBFB;
+            position: fixed;
+            bottom: 0px;
+            padding-top: 20px;
+            padding-bottom: 38px;
+    
+            ul {
+                margin-left: 30px;
+                margin-right: 30px;
+    
+                display: flex;
+                justify-content: space-between;
+            }
+    
+            ul li {
+                /* background-color: #43A047; */
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+            }
+    
+    
+            ul li a img {
+                width: 27px;
+                height: 27px;
+                margin-left: 4px;
+                margin-top: 4px;
+                margin-bottom: 4px;
+            }
+    
+            ul li p {
+                font-size: 12px;
+                font-weight: 600;
+                text-align: center;
+            }
+        }
