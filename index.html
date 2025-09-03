@@ -9,7 +9,9 @@
   <link rel="stylesheet" href="./css/common.css" />
   <link rel="stylesheet" href="./css/main.css" />
 
+  <script src="./js/favorite.js" defer></script>
   <script src="./js/main.js" defer></script>
+
 </head>
 
 <body>
@@ -34,10 +36,6 @@
     </form>
     <h4>Suitability</h4>
     <form action="#" class="suitability">
-      <p>
-        <label for="suit1">Dog-Friendly</label>
-        <input type="checkbox" id="suit1" name="suit1" value="" />
-      </p>
       <p>
         <label for="suit2">Bookable</label>
         <input type="checkbox" id="suit2" name="suit2" value="" />
@@ -69,7 +67,7 @@
       <img src="./image/site1.jpg" alt="camping-site-image" class="site" />
       <div>
         <h2>Butchers Flat Campsite</h2>
-        <img src="./image/icon/favorite-noncheck.svg" alt="favorite" />
+        <img src="./image/icon/favorite-noncheck.svg" alt="favorite" class="favorite-check" data-id="site1" />
       </div>
       <p>Mount Richmond Forest Park</p>
       <p>Marlborough</p>
@@ -86,19 +84,19 @@
         <p>Home</p>
       </li>
       <li class="map">
-        <a href="#">
+        <a href="./map.html">
           <img src="./image/icon/map.svg" alt="map-button" />
         </a>
         <p>Map</p>
       </li>
       <li class="saved">
-        <a href="#">
+        <a href="./saved.html">
           <img src="./image/icon/favorite-noncheck.svg" alt="saved-button" />
         </a>
         <p>Saved</p>
       </li>
       <li class="info">
-        <a href="#">
+        <a href="./info.html">
           <img src="./image/icon/info.svg" alt="information-button" />
         </a>
         <p>Info</p>

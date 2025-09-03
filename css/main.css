@@ -76,7 +76,6 @@
         z-index: 1000;
         transition: transform 0.3s ease;
 
-
     }
 
 
@@ -99,11 +98,12 @@
 
     .regions {
         width: 292px;
-        height: 26px;
+        height: 36px;
         background-color: #fff;
         border-bottom: 1px solid #616161;
         border-radius: 8px;
         margin-bottom: 34px;
+        cursor: pointer;
     }
 
 
@@ -115,6 +115,7 @@
 
     .suitability label {
         font-size: 16px;
+        cursor: pointer;
     }
 
 
@@ -125,6 +126,7 @@
         border: solid 1px #616161;
         background-color: #fff;
         margin-top: 94px;
+        cursor: pointer;
     }
 
 
@@ -143,6 +145,7 @@
     .content-box {
         margin: 28px 30px 0px 30px;
         border-bottom: solid 1px #E0E0E0;
+        cursor: pointer;
     }
 
     .content-box .site {
@@ -173,5 +176,7 @@
     main p:last-child {
         margin-bottom: 30px;
     }
+
+
 
 }

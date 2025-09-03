@@ -34,9 +34,7 @@ fetch('./data/DOC_campsites.geojson')
         if (paras[3]) paras[3].textContent = 'Landscape : ' + safe(p.landscape);
         // 4: access
         if (paras[4]) paras[4].textContent = 'Access : ' + safe(p.access);
-        // 5: dogs-allowed
-        if (paras[5]) paras[5].textContent = 'Dogs-allowed : ' + safe(p.dogsAllowed);
-        // 6: bookable
+        // 5: bookable
         if (paras[6]) paras[6].textContent = 'Bookable : ' + safe(p.bookable);
 
         // Last pL facilities 
@@ -46,4 +44,16 @@ fetch('./data/DOC_campsites.geojson')
     .catch(() => {
         infoBox.innerHTML = '<h3>Site Information</h3><p>Load error.</p>';
     });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const params = new URLSearchParams(location.search);
+    const id = params.get('id');
+    const heart = document.querySelector('img.favorite-check');
+    if (!heart || !id) return;
+
+    heart.dataset.id = id;
+
+    window.syncFavoriteIcons && window.syncFavoriteIcons();
+});
+
 
