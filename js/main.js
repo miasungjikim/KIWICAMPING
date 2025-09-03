@@ -32,8 +32,9 @@ fetch('./data/DOC_campsites.geojson')
     contentIndex.innerHTML = '';
     features.forEach(f => {
       const p = f.properties || {};
+      const id = p.OBJECTED ?? f.id;
 
-
+      const FALLBACK_IMG = './image/site1.jpg';
       //make .content-box as div 
       const contentCard = document.createElement('div');
       contentCard.className = 'content-box';
@@ -52,6 +53,12 @@ fetch('./data/DOC_campsites.geojson')
       `;
 
       contentIndex.appendChild(contentCard);
+
+      //After click, go to the content.html
+      contentCard.addEventListener('click', () => {
+        if (!id) return;
+        location.href = `content.html?id=${encodeURIComponent(id)}`;
+      });
 
     });
   })
