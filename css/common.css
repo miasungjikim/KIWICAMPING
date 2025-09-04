@@ -5,6 +5,7 @@
 */
 
 
+
 h1,
 h2,
 h3 {
@@ -64,4 +65,19 @@ footer ul li p {
     font-size: 12px;
     font-weight: 600;
     text-align: center;
+}
+
+
+@media only screen and (min-width: 391px) {
+    body{
+        background-color: orange;
+    }
+
+    .frame-box{
+        /* width:390px; */
+        background-color: violet;
+        margin:auto;
+    }
+
+
 }
