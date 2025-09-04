@@ -1,0 +1,38 @@
+@media only screen and (max-width: 390px) {
+    header {
+        border-bottom: 1px solid #9a9a9a;
+        box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.25);
+        padding-top: 60px;
+        padding-bottom: 20px;
+    }
+
+    header h2 {
+        font-size: 19px;
+        text-align: center;
+    }
+
+    #map {
+        width: 100%;
+        height: calc(100vh - 194px);
+    }
+
+
+    .popup h4 {
+        margin: 0 0 4px;
+        font-size: 16px;
+    }
+
+    .popup p {
+        margin: 0;
+        font-size: 13px;
+        color: #555;
+    }
+
+    .popup a {
+        display: inline-block;
+        margin-top: 6px;
+        font-size: 13px;
+        text-decoration: underline;
+    }
+
+}
