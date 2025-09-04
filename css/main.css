@@ -20,7 +20,6 @@
     .search-box {
         width: 100%;
         max-width: 288px;
-        margin-bottom: 14px;
     }
 
     .search-box input[type=text] {
