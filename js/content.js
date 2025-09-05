@@ -8,6 +8,8 @@ const paras = infoBox.querySelectorAll('p');
 
 const FALLBACK_IMG = './image/site1.jpg';
 
+
+
 fetch('./data/DOC_campsites.geojson')
     .then(r => r.json())
     .then(data => {
@@ -22,6 +24,7 @@ fetch('./data/DOC_campsites.geojson')
         imgEl.src = p.introductionThumbnail || FALLBACK_IMG;
         imgEl.alt = p.name || 'site';
         titleEl.textContent = p.name || '';
+    
 
         // P
         // 0: introduction
@@ -43,8 +46,10 @@ fetch('./data/DOC_campsites.geojson')
     })
     .catch(() => {
         infoBox.innerHTML = '<h3>Site Information</h3><p>Load error.</p>';
+
     });
 
+//FAVORITE
 document.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(location.search);
     const id = params.get('id');
@@ -55,5 +60,109 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.syncFavoriteIcons && window.syncFavoriteIcons();
 });
+
+// MAP
+fetch('./data/DOC_campsites.geojson')
+    .then(res => res.json())
+    .then(data => {
+        const features = data?.features || [];
+        const f = features.find(x => String(x.properties?.OBJECTED ?? x.id) === String(targetID));
+        
+        const p = f.geometry;
+
+        console.log(p);
+        console.log(p.coordinates[0]);
+        console.log(p.coordinates[1]);
+
+
+        const map = L.map('map');
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 16,
+        }).addTo(map);
+        map.setView([p.coordinates[1], p.coordinates[0]], 12); // ⭐️basic show
+
+        setTimeout(() => map.invalidateSize(), 0);
+
+        
+
+        
+        // making custom icon 
+        const campIcon = L.icon({
+            iconUrl: './image/icon/camp-marker.svg', //icon
+            iconSize: [20, 20],   // icon size
+            iconAnchor: [16, 32],   // position
+            popupAnchor: [0, -32]    // open popup
+        });
+
+        var p1 = p.coordinates[1];
+
+
+        const popup = L.popup({ className: 'custom-popup-style' })
+        .setLatLng([p.coordinates[1], p.coordinates[0]])
+        .setContent("HERE IS CAMPING SITE")
+        .openOn(map);
+
+
+
+
+
+
+        // // amm marker
+        // const layer = L.geoJSON(features, {
+        //     pointToLayer: (feature, latlng) => L.marker(latlng, { icon: campIcon }),
+        //     onEachFeature: (feature, marker) => {
+        //         marker.bindPopup(popupHtml(feature));
+        //     }
+        // }).addTo(map);
+
+        const circle = L.circle([p.coordinates[1], p.coordinates[0]], {
+        color: 'red',
+        fillColor: '#f03',
+        fillOpacity: 0.5,
+        radius: 400
+    }).addTo(map);
+
+
+
+
+    })
+    .catch(err => {
+        console.error('Failed to load GeoJSON:', err);
+    });
+
+
+
+    L.Icon.Default.mergeOptions({
+        iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
+        iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
+        shadowUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-shadow.png',
+    });
+
+    
+
+    function popupHtml(feature) {
+        const p = feature.properties || {};
+        const name = p.name || 'Unknown site';
+
+
+    const id = p.OBJECTID ?? p.OBJECTED ?? feature.id;
+
+
+    const link = id ? `content.html?id=${encodeURIComponent(id)}` : null;
+    return `
+    <div class="popup">
+    <h4>${name}</h4>
+    </div>
+`;
+}
+
+
+
+
+
+   
+
+
+
 
 

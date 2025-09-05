@@ -1,6 +1,6 @@
 
 
-// 0) (CDN일 때 자주 나는 마커 아이콘 404 방지)
+// 0) 
 L.Icon.Default.mergeOptions({
     iconRetinaUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon-2x.png',
     iconUrl: 'https://unpkg.com/leaflet@1.9.4/dist/images/marker-icon.png',
@@ -10,8 +10,7 @@ L.Icon.Default.mergeOptions({
 // map
 const map = L.map('map');
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 8,
-    attribution: '&copy; OpenStreetMap contributors'
+    maxZoom: 16,
 }).addTo(map);
 map.setView([-43.0, 171.0], 7); // ⭐️basic show
 
@@ -39,7 +38,7 @@ fetch('./data/DOC_campsites.geojson')
     .then(data => {
         const features = data?.features || [];
 
-        // 커스텀 아이콘 만들기
+        // making custom icon 
         const campIcon = L.icon({
             iconUrl: './image/icon/camp-marker.svg', //icon
             iconSize: [20, 20],   // icon size

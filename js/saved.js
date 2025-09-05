@@ -26,11 +26,11 @@
 
         const ids = getIds();
         if (!ids.length) {
-            container.innerHTML = `<p>EMPTY</p>`;
+            container.innerHTML = `<p>PLEASE CLICK 'FAVORITE ICON(HEART)' AT THE HOMT OR DETAIL PAGE FIRST.</p>`;
             return;
         }
 
-        // 데이터 불러오기
+        // LOADING DATA... PLZ
         let data;
         try {
             const res = await fetch('./data/DOC_campsites.geojson');
@@ -45,7 +45,7 @@
         const items = [];
         for (const f of features) {
             const p = f.properties || {};
-            const fid = (p.OBJECTED ?? p.OBJECTID ?? f.id)?.toString(); // ← index 규칙 보강
+            const fid = (p.OBJECTED ?? p.OBJECTID ?? f.id)?.toString(); 
             if (!fid) continue;
             if (!ids.includes(fid)) continue;
 
@@ -89,9 +89,9 @@
             }
         }, 0);
     });
-    // saved.js 하단(초기 렌더 바인딩들 아래)에 추가
+
     document.addEventListener('click', (e) => {
-        // 하트 클릭이면 이동 막기
+        // IF CLICK HEARD, NO APPCEPT ! 
         if (e.target.closest('img.favorite-check')) return;
 
         const card = e.target.closest('.saved-box');
