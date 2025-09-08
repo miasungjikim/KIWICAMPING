@@ -22,8 +22,9 @@
         max-width: 288px;
     }
 
-    .search-box input[type=text] {
-        width: 100%;
+    .search-box input[type="search"] {
+        appearance: none;
+        width: 86vw;
         height: 47px;
         border-radius: 8px;
         background-color: #EAEAEA;
@@ -176,6 +177,23 @@
         margin-bottom: 30px;
     }
 
+    .load-more-box {
+        /* background-color: yellowgreen; */
+        margin: auto 0;
+        /* height: 100px; */
+    }
+
+    .load-more-box button {
+        text-align: center;
+        width: 330px;
+        padding: 10px 0px 10px 0px;
+        margin-left: 30px;
+        margin-top: 30px;
+        background-color: #fff;
+        border-radius: 8px;
+        border: 1px solid #616161;
+        cursor: pointer;
+    }
 
 
 }
