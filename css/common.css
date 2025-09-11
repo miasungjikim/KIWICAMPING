@@ -41,17 +41,22 @@ footer {
 footer ul {
     margin-left: 30px;
     margin-right: 30px;
-
     display: flex;
     justify-content: space-between;
 }
 
 footer ul li {
-    /* background-color: #43A047; */
+background-color: transparent;  
     width: 36px;
     height: 36px;
     border-radius: 50%;
 }
+
+.active{
+    background-color: #FCBE5A;
+}
+
+
 
 
 footer ul li a img {
@@ -60,6 +65,7 @@ footer ul li a img {
     margin-left: 4px;
     margin-top: 4px;
     margin-bottom: 4px;
+    margin-bottom:4px;
 }
 
 footer ul li p {

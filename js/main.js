@@ -13,9 +13,29 @@ function closeMenu(e) {
   if (!navi) return;
   navi.classList.remove("active");
 }
+
+
+//scroll-up
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('up-button');
+  const main = document.querySelector('main'); 
+
+  btn.addEventListener('click', () => {
+    main.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
+  });
+});
+
+
+
+
 // expose to inline handlers 
 window.toggleMenu = toggleMenu;
 window.closeMenu = closeMenu;
+
+
 
 
 //CONNECT GEOJSON to index.html
@@ -91,7 +111,7 @@ function bindLoadMore() {
 }
 
 // rendering
-// ⭐️append render - show only 5 (WSC School)
+// ⭐️append render - show only 5 (W5555555555555 School)
 function appendCards(list) {
   if (!Array.isArray(list)) return;
 
@@ -138,7 +158,7 @@ function appendCards(list) {
 
 // ⭐️⭐️⭐️ clicki binding
 function ensureLoadMoreButton() {
-  // 버튼이 이미 있으면 그대로 사용
+  // if the button exist -> just use it 
   let btn = document.getElementById('loadMore');
   if (!btn) {
     //make button wrapper
@@ -151,39 +171,37 @@ function ensureLoadMoreButton() {
     btn.type = 'button';
     btn.textContent = 'Show more';
 
-    //main 맨 아래에 붙이기
+    //below to main
     box.appendChild(btn);
-    // contentIndex가 <main>이므로, 그 **아래로** 버튼을 append
     contentIndex.appendChild(box);
   }
 
-  // 처음 상태: 더 보여줄 게 없으면 숨김
+  // if there is nothing to show, hide
   if (renderedCount >= CURRENT_LIST.length) {
     btn.style.display = 'none';
   } else {
     btn.style.display = 'block';
   }
 
-  // 중복 바인딩 방지 위해 기존 핸들러 제거 후 다시 연결
+  // .. hmm it is from stackflow ... but still don'y know what is 'cloneNode'
   btn.replaceWith(btn.cloneNode(true));
   const freshBtn = document.getElementById('loadMore');
 
   freshBtn.addEventListener('click', () => {
-    // 다음 5개
+    //next 5
     const next = CURRENT_LIST.slice(renderedCount, renderedCount + BATCH);
     appendCards(next);
     renderedCount += next.length;
 
-    // 끝까지 보여줬으면 버튼 숨김
+    // after show to end -> hide . ? 
     if (renderedCount >= CURRENT_LIST.length) {
       freshBtn.style.display = 'none';
     } else {
-      // 버튼이 항상 맨 아래로 가도록 스크롤
+      // always button be below (important)
       freshBtn.scrollIntoView({ behavior: 'smooth', block: 'end' });
     }
   });
 }
-
 
 
 
@@ -201,18 +219,18 @@ fetch('./data/DOC_campsites.geojson')
       console.log('no feature or coordinates');
     }
 
-    // 전역 저장
+    // sace
     ALL_SITES = features;
 
-    // 초기 렌더
-    CURRENT_LIST = ALL_SITES;                             // ✅ 현재 세트 지정
+    // initial render
+    CURRENT_LIST = ALL_SITES;                             // set current set ... 
     renderedCount = 0;
     contentIndex.innerHTML = '';                          //reset
     appendCards(CURRENT_LIST.slice(0, BATCH));            // 0~4
     renderedCount += Math.min(BATCH, CURRENT_LIST.length);
 
     //add more
-    ensureLoadMoreButton();                               // ✅ CURRENT_LIST 기준 버튼 제어
+    ensureLoadMoreButton();                               //CURRENT_LIST button control
 
     // filter event connect
     bindNavFilters();
@@ -222,7 +240,6 @@ fetch('./data/DOC_campsites.geojson')
 
 
 //⭐️⭐️NAV FILTER
-
 
 function prop(site, key) {
   const p = site?.properties ?? site;
@@ -287,53 +304,65 @@ function bindNavFilters() {
 const searchForm = document.getElementById('searchForm');
 const searchInput = document.getElementById('searchInput');
 
+
+
+
+
+
+//
+//
+//Here I've got help from gooling ... still need to understand 
+//
+//
+
 if (searchForm) {
-  // 폼 제출 막기
+  // block(?) form submit
   searchForm.addEventListener('submit', (e) => {
-    e.preventDefault();                       // ✅ 페이지 리로드 방지
+    e.preventDefault();                       // prevent page prevent
     console.log('[search submit]', searchInput?.value || '');
-    // 다음 단계에서: applySearch(searchInput.value);
+    // next stage: applySearch(searchInput.value);
     if (window.applySearch) window.applySearch(searchInput.value);
   });
 }
 
 if (searchInput) {
-  // 인풋에서 엔터 눌러도 제출 막기
   searchInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
       e.preventDefault();                     // ✅ form submit 방지
       console.log('[search enter]', searchInput.value);
-      // 다음 단계에서: applySearch(searchInput.value);
       if (window.applySearch) window.applySearch(searchInput.value);
     }
   });
 
 }
-
-// ====== NAME-ONLY SEARCH ======
+//
+//
+//SEARCHING 
+//
+//
 function getName(site) {
   const p = site?.properties || {};
-  // 데이터에 따라 대소문자/다른 키일 수도 있으니 몇 가지만 안전하게 체크
   return (p.name ?? p.Name ?? p.SITE_NAME ?? "").toString();
 }
 
 function norm(s) {
   return (s ?? "")
     .toString()
-    .normalize("NFC")      // 한글/악센트 문자 안전
+    .normalize("NFC")     
     .toLowerCase().trim();
 }
 
 function applySearch(query) {
   const q = norm(query);
 
-  // 검색어 없으면 전체 보여주기 (원하면 여기서 return으로 '아무것도 안 하기'로 바꿔도 됨)
+  //if there is nothing to searching, just show everything
   const base = Array.isArray(ALL_SITES) ? ALL_SITES : [];
   const list = q
     ? base.filter(f => norm(getName(f)).includes(q))
     : base;
 
-  // 렌더 갱신
+
+  // renew render
   CURRENT_LIST = list;
   renderedCount = 0;
   contentIndex.innerHTML = "";
@@ -346,6 +375,6 @@ function applySearch(query) {
   }
 }
 
-// 전역 노출
+// expose all 
 window.applySearch = applySearch;
 
