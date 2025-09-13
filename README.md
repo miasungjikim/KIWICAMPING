@@ -46,7 +46,10 @@ KIWICAMPING/
 │ └── common.js # Footer navigation highlight
 │
 └── data/
-└── DOC_campsites.geojson
+└  ├── DOC_campsites.geojson
+└── image/
+└  ├── icon/
+
 ```
 </pre>
 ---
