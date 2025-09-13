@@ -18,7 +18,7 @@ function closeMenu(e) {
 //scroll-up
 document.addEventListener('DOMContentLoaded', () => {
   const btn = document.getElementById('up-button');
-  const main = document.querySelector('main'); 
+  const main = document.querySelector('main');
 
   btn.addEventListener('click', () => {
     main.scrollTo({
@@ -348,7 +348,7 @@ function getName(site) {
 function norm(s) {
   return (s ?? "")
     .toString()
-    .normalize("NFC")     
+    .normalize("NFC")
     .toLowerCase().trim();
 }
 
