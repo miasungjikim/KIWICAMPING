@@ -20,6 +20,8 @@ The app allows users to browse campsites, view details, check maps, and save fav
 
 ## 📂 Project Structure  
 KIWICAMPING/
+<pre>
+```
 │── index.html # Home page with search & filters
 │── content.html # Detail page for one campsite
 │── map.html # Map page with Leaflet markers
@@ -45,8 +47,8 @@ KIWICAMPING/
 │
 └── data/
 └── DOC_campsites.geojson
-
-
+```
+</pre>
 ---
 
 ## 🛠 Tools & Techniques  
